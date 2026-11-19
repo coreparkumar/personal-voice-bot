@@ -91,7 +91,23 @@ interface Provider {
 function pickProvider(): Provider | null {
   const override = process.env.LLM_MODEL?.trim();
 
+  if (process.env.OPENROUTER_API_KEY) {
+    return {
+      name: "openrouter",
+      url: "https://openrouter.ai/api/v1/chat/completions",
+      key: process.env.OPENROUTER_API_KEY,
+      model: override || "openai/gpt-4o-mini",
+    };
+  }
   if (process.env.OPENAI_API_KEY) {
+    if (process.env.OPENAI_API_KEY.startsWith("sk-or-")) {
+      return {
+        name: "openrouter",
+        url: "https://openrouter.ai/api/v1/chat/completions",
+        key: process.env.OPENAI_API_KEY,
+        model: override || "openai/gpt-4o-mini",
+      };
+    }
     return {
       name: "openai",
       url: "https://api.openai.com/v1/chat/completions",
@@ -161,7 +177,7 @@ export async function POST(req: NextRequest) {
 
   const provider = pickProvider();
   if (!provider) {
-    console.error("No LLM API key configured (OPENAI_API_KEY / GROQ_API_KEY / GEMINI_API_KEY).");
+    console.error("No LLM API key configured (OPENROUTER_API_KEY / OPENAI_API_KEY / GROQ_API_KEY / GEMINI_API_KEY).");
     return fail(503, "The voice persona isn't configured yet. The site owner needs to add an API key.");
   }
 

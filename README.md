@@ -6,10 +6,11 @@ Single-page Next.js 15 (App Router) + Tailwind CSS app. Visitors can ask questio
 
 1. Push this folder to a GitHub repo (or run `npx vercel` from this folder).
 2. In **Project Settings → Environment Variables**, add one key:
+   - `OPENROUTER_API_KEY` (default, model `openai/gpt-4o-mini`), **or**
    - `OPENAI_API_KEY` (default, model `gpt-4o-mini`), **or**
    - `GROQ_API_KEY` (model `llama-3.3-70b-versatile`), **or**
    - `GEMINI_API_KEY` (model `gemini-2.0-flash`)
-   Priority if several are set: OpenAI, then Groq, then Gemini.
+   Priority if several are set: OpenRouter, OpenAI, Groq, then Gemini.
 3. Optional: set `LLM_MODEL` to override the model name for the active provider.
 4. Redeploy. The key stays server-side in `app/api/chat/route.ts`.
 
