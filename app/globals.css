@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  background: #08090b;
+  color: #ededef;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image:
+    radial-gradient(60rem 30rem at 50% -10%, rgba(99, 102, 241, 0.12), transparent 60%),
+    radial-gradient(40rem 24rem at 90% 10%, rgba(16, 185, 129, 0.06), transparent 60%);
+  background-repeat: no-repeat;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.4);
+}
+
+/* Slim scrollbars for the conversation feed */
+.feed::-webkit-scrollbar {
+  width: 8px;
+}
+.feed::-webkit-scrollbar-thumb {
+  background: #23252b;
+  border-radius: 8px;
+}
+.feed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
